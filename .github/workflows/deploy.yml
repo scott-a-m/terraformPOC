@@ -6,8 +6,8 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  REGION: "europe-west2"                      # Change to your GCP region
-  REPOSITORY: "helloworld"                    # Your Artifact Registry repo name
+  REGION: "europe-west2"
+  REPOSITORY: "helloworld"
   IMAGE: "europe-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/helloworld/hello-cloud-run:${{ github.sha }}"
 
 jobs:
