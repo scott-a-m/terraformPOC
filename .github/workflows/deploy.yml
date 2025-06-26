@@ -45,10 +45,7 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./terraform
-        run: terraform apply -auto-approve \
-          -var="project_id=${{ env.PROJECT_ID }}" \
-          -var="region=${{ env.REGION }}" \
-          -var="image_url=${{ env.IMAGE }}"
+        run: terraform apply -auto-approve -var="project_id=${{ env.PROJECT_ID }}" -var="region=${{ env.REGION }}" -var="image_url=${{ env.IMAGE }}"
 
       - name: Output Cloud Run URL
         working-directory: ./terraform
