@@ -5,7 +5,7 @@ const path = require('path');
 
 const app = express();
 
-const swaggerDocument = YAML.load(path.join(__dirname, '..', 'openapi.yaml'));
+const swaggerDocument = YAML.load(path.join(__dirname, 'openapi.yaml'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
