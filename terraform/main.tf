@@ -1,4 +1,3 @@
- helloworld-poc-bucket
 terraform {
   required_providers {
     google = {
