@@ -1,9 +1,15 @@
+ helloworld-poc-bucket
 terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
       version = "~> 4.0"
     }
+  }
+
+  backend "gcs" {
+    bucket  = "helloworld-poc-bucket"
+    prefix  = "terraform/state"  # folder path inside the bucket to store state files
   }
 }
 
@@ -34,9 +40,9 @@ resource "google_cloud_run_service" "default" {
 }
 
 resource "google_cloud_run_service_iam_member" "invoker" {
-  project        = var.project_id
-  location       = google_cloud_run_service.default.location
-  service        = google_cloud_run_service.default.name
-  role           = "roles/run.invoker"
-  member         = "allUsers"
+  project  = var.project_id
+  location = google_cloud_run_service.default.location
+  service  = google_cloud_run_service.default.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
