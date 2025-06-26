@@ -6,8 +6,8 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  REGION: "us-central1"
-  IMAGE: "gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-cloud-run:${{ github.sha }}"
+  REGION: "europe-west2"
+  IMAGE: "europe-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/helloworld/hello-cloud-run:${{ github.sha }}"
 
 jobs:
   deploy:
