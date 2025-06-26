@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   description: API documentation for the Node.js app running on Cloud Run
 servers:
-  - url: http://localhost:8080
+  - url: /
 paths:
   /:
     get:
