@@ -1,5 +1,13 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const path = require('path');
+
 const app = express();
+
+const swaggerDocument = YAML.load(path.join(__dirname, 'openapi.yaml'));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
   res.send('Hello from GCP Cloud Run!');
@@ -61,4 +69,5 @@ app.get('/api/status', (req, res) => {
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log(`Swagger UI available at http://localhost:${port}/api-docs`);
 });

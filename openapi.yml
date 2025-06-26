@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+  title: Node.js Cloud Run API
+  version: "1.0.0"
+  description: API documentation for the Node.js app running on Cloud Run
+servers:
+  - url: http://localhost:8080
+paths:
+  /:
+    get:
+      summary: Root greeting
+      responses:
+        "200":
+          description: Returns a greeting message.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello from GCP Cloud Run!
+
+  /time:
+    get:
+      summary: Get current server time
+      parameters:
+        - in: query
+          name: timezone
+          schema:
+            type: string
+          description: Timezone to display time in (e.g., Europe/London)
+      responses:
+        "200":
+          description: Current server time string.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Current server time in Europe/London: 9/12/2023, 3:45:00 PM
+        "400":
+          description: Invalid timezone provided.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Invalid timezone
+
+  /random:
+    get:
+      summary: Generate a random number
+      parameters:
+        - in: query
+          name: min
+          schema:
+            type: integer
+          description: Minimum number (default 0)
+        - in: query
+          name: max
+          schema:
+            type: integer
+          description: Maximum number (default 1000)
+      responses:
+        "200":
+          description: Random number generated.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Your random number between 0 and 1000 is: 123
+        "400":
+          description: min cannot be greater than max.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: min cannot be greater than max
+
+  /hello/{name}:
+    get:
+      summary: Personalized hello message
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          description: Name to greet
+        - in: query
+          name: style
+          schema:
+            type: string
+            enum: [formal, casual]
+          description: Greeting style
+      responses:
+        "200":
+          description: Greeting message.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello, Alice! Welcome to Cloud Run.
+
+  /api/status:
+    get:
+      summary: Get API status info
+      parameters:
+        - in: query
+          name: detail
+          schema:
+            type: string
+            enum: [full]
+          description: Level of detail
+      responses:
+        "200":
+          description: Status information JSON.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: integer
+                    format: int64
+                    example: 1694514300000
+                  uptime:
+                    type: number
+                    format: float
+                    nullable: true
+                    example: 12345.67
+                  memoryUsage:
+                    type: object
+                    nullable: true
+                    example:
+                      rss: 12345678
+                      heapTotal: 6789012
+                      heapUsed: 5678901
+                      external: 234567
