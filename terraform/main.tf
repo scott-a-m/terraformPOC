@@ -18,7 +18,7 @@ provider "google" {
 }
 
 resource "google_cloud_run_service" "default" {
-  name     = "hello-cloud-run-v2"
+  name     = "hello-cloud-run-v3"
   location = var.region
 
   template {
