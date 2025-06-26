@@ -33,7 +33,7 @@ app.get('/random', (req, res) => {
   const max = parseInt(req.query.max) || 1000;
   if (min > max) return res.status(400).send('min cannot be greater than max');
   const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-  res.send(`Your random number between ${min} and ${max} is: ${randomNum}`);
+  res.send(`Your lucky random number between ${min} and ${max} is: ${randomNum}`);
 });
 
 app.get('/hello/:name', (req, res) => {
